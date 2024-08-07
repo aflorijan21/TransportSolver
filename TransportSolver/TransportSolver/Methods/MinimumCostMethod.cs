@@ -33,7 +33,7 @@ namespace TransportSolver.Methods
             txtSolutionSteps.Clear();
             txtSolutionSteps.AppendText("Koraci rješavanja transportnog problema metodom minimalnih troškova:\r\n");
 
-            while (preostaliKapaciteti.Any(c => c > 0) && preostalePotrebe.Any(d => d > 0))
+            while (Array.Exists(preostaliKapaciteti, c => c > 0) && Array.Exists(preostalePotrebe, d => d > 0))
             {
                 int minTrosak = int.MaxValue;
                 int minRedak = -1;

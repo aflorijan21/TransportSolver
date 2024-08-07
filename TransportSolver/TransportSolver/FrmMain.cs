@@ -81,7 +81,7 @@ namespace TransportSolver
 
         private void btnSolve_Click(object sender, EventArgs e)
         {
-            if (Validate())
+            if (ValidateInputs())
             {
                 string result = "Z = ?";
                 int rows = dgvMatrix.Rows.Count;
@@ -97,13 +97,13 @@ namespace TransportSolver
                     }
                 }
 
-                if (cmbMethod.SelectedItem == "Metoda sjeverozapadnog kuta")
+                if (cmbMethod.SelectedItem.ToString() == "Metoda sjeverozapadnog kuta")
                 {
                     result = NorthwestCornerMethod.NorthWestCornerCalculator(matrix, txtOutputCapacity.Text, txtDestinationNeeds.Text, txtSolutionSteps);
-                }else if(cmbMethod.SelectedItem == "Metoda minimalnih troškova")
+                }else if(cmbMethod.SelectedItem.ToString() == "Metoda minimalnih troškova")
                 {
                     result = MinimumCostMethod.MinimumCostCalculator(matrix, txtOutputCapacity.Text, txtDestinationNeeds.Text, txtSolutionSteps);
-                }else if (cmbMethod.SelectedItem == "Vogel-ova metoda")
+                }else if (cmbMethod.SelectedItem.ToString() == "Vogel-ova metoda")
                 {
                     result = VogelMethod.VogelCalculator(matrix, txtOutputCapacity.Text, txtDestinationNeeds.Text, txtSolutionSteps);
                 }
@@ -112,7 +112,7 @@ namespace TransportSolver
             }
         }
 
-        private bool Validate()
+        private bool ValidateInputs()
         {
             if (string.IsNullOrWhiteSpace(txtDestinationNeeds.Text) || string.IsNullOrWhiteSpace(txtOutputCapacity.Text))
             {
