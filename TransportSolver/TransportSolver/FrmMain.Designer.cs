@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmMain));
             this.cmbMethod = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -58,6 +58,7 @@
             this.label16 = new System.Windows.Forms.Label();
             this.btnExample = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
+            this.btnExample2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatrix)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudRows)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudColumns)).BeginInit();
@@ -93,14 +94,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvMatrix.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMatrix.ColumnHeadersVisible = false;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvMatrix.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvMatrix.DefaultCellStyle = dataGridViewCellStyle1;
             this.dgvMatrix.Location = new System.Drawing.Point(451, 75);
             this.dgvMatrix.Name = "dgvMatrix";
             this.dgvMatrix.RowHeadersVisible = false;
@@ -356,9 +357,9 @@
             // 
             // btnExample
             // 
-            this.btnExample.Location = new System.Drawing.Point(351, 12);
+            this.btnExample.Location = new System.Drawing.Point(351, 11);
             this.btnExample.Name = "btnExample";
-            this.btnExample.Size = new System.Drawing.Size(75, 23);
+            this.btnExample.Size = new System.Drawing.Size(87, 23);
             this.btnExample.TabIndex = 26;
             this.btnExample.Text = "Učitaj primjer";
             this.btnExample.UseVisualStyleBackColor = true;
@@ -375,12 +376,23 @@
             this.btnReset.UseVisualStyleBackColor = true;
             this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
+            // btnExample2
+            // 
+            this.btnExample2.Location = new System.Drawing.Point(443, 11);
+            this.btnExample2.Name = "btnExample2";
+            this.btnExample2.Size = new System.Drawing.Size(87, 23);
+            this.btnExample2.TabIndex = 28;
+            this.btnExample2.Text = "Učitaj primjer 2";
+            this.btnExample2.UseVisualStyleBackColor = true;
+            this.btnExample2.Click += new System.EventHandler(this.btnExample2_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(967, 628);
+            this.Controls.Add(this.btnExample2);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnExample);
             this.Controls.Add(this.label16);
@@ -453,6 +465,7 @@
         private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Button btnExample;
         private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.Button btnExample2;
     }
 }
 

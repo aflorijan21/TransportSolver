@@ -206,5 +206,37 @@ namespace TransportSolver
 
             SetupDgvMatrixCellSize();
         }
+
+        private void btnExample2_Click(object sender, EventArgs e)
+        {
+            txtOutputCapacity.Text = "300,400,500";
+            txtDestinationNeeds.Text = "250,350,400,200";
+
+            nudRows.Value = 3;
+            nudColumns.Value = 4;
+
+            int[,] matrix = new int[,]
+            {
+                { 3,1,7,4 },
+                { 2,6,5,9 },
+                { 8,3,3,2 }
+            };
+            dgvMatrix.Rows.Clear();
+            dgvMatrix.Columns.Clear();
+
+            dgvMatrix.ColumnCount = matrix.GetLength(1);
+
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                string[] row = new string[matrix.GetLength(1)];
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    row[j] = matrix[i, j].ToString();
+                }
+                dgvMatrix.Rows.Add(row);
+            }
+
+            SetupDgvMatrixCellSize();
+        }
     }
 }
