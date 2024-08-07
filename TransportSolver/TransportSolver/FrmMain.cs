@@ -30,6 +30,7 @@ namespace TransportSolver
             cmbMethod.Items.Add("Metoda sjeverozapadnog kuta");
             cmbMethod.Items.Add("Metoda minimalnih troškova");
             cmbMethod.Items.Add("Vogel-ova metoda");
+            cmbMethod.Items.Add("MODI Metoda");
 
             cmbMethod.SelectedItem = "Metoda sjeverozapadnog kuta";
         }
@@ -44,7 +45,7 @@ namespace TransportSolver
 
         private void UpdateMatrixSizeLabel(int rows, int columns)
         {
-            lblMatrixSize.Text = rows + "x" + columns;
+            lblMatrixSize.Text = columns + "x" + rows;
         }
 
         private void SetupDgvMatrixCellSize()
@@ -106,6 +107,9 @@ namespace TransportSolver
                 }else if (cmbMethod.SelectedItem.ToString() == "Vogel-ova metoda")
                 {
                     result = VogelMethod.VogelCalculator(matrix, txtOutputCapacity.Text, txtDestinationNeeds.Text, txtSolutionSteps);
+                } else if (cmbMethod.SelectedItem.ToString() == "MODI Metoda")
+                {
+                    result = ModiMethod.ModiCalculator(matrix, txtOutputCapacity.Text, txtDestinationNeeds.Text, txtSolutionSteps);
                 }
 
                 lblResult.Text = result;
@@ -156,5 +160,51 @@ namespace TransportSolver
             txtSolutionSteps.Text = "";
         }
 
+        private void btnExample_Click(object sender, EventArgs e)
+        {
+            txtOutputCapacity.Text = "45,50,90,45";
+            txtDestinationNeeds.Text = "120,40,70";
+
+            nudRows.Value = 4;
+            nudColumns.Value = 3;
+
+            int[,] matrix = new int[,]
+            {
+                { 5, 10, 15 },
+                { 12, 4, 8 },
+                { 7, 3, 9 },
+                { 14, 16, 1 }
+            };
+            dgvMatrix.Rows.Clear();
+            dgvMatrix.Columns.Clear();
+
+            dgvMatrix.ColumnCount = matrix.GetLength(1);
+
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                string[] row = new string[matrix.GetLength(1)];
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    row[j] = matrix[i, j].ToString();
+                }
+                dgvMatrix.Rows.Add(row);
+            }
+
+            SetupDgvMatrixCellSize();
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            dgvMatrix.Rows.Clear();
+            dgvMatrix.Columns.Clear();
+
+            nudRows.Value = 0;
+            nudColumns.Value = 0;
+
+            txtOutputCapacity.Clear();
+            txtDestinationNeeds.Clear();
+
+            SetupDgvMatrixCellSize();
+        }
     }
 }
