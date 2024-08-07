@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cmbMethod = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvMatrix = new System.Windows.Forms.DataGridView();
@@ -37,6 +37,12 @@
             this.label3 = new System.Windows.Forms.Label();
             this.nudColumns = new System.Windows.Forms.NumericUpDown();
             this.lblMatrixSize = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtOutputCapacity = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtDestinationNeeds = new System.Windows.Forms.TextBox();
+            this.btnSolve = new System.Windows.Forms.Button();
+            this.lblResult = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatrix)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudRows)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudColumns)).BeginInit();
@@ -50,6 +56,7 @@
             this.cmbMethod.Name = "cmbMethod";
             this.cmbMethod.Size = new System.Drawing.Size(198, 21);
             this.cmbMethod.TabIndex = 0;
+            this.cmbMethod.SelectedIndexChanged += new System.EventHandler(this.cmbMethod_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -68,23 +75,24 @@
             this.dgvMatrix.AllowUserToResizeRows = false;
             this.dgvMatrix.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMatrix.ColumnHeadersVisible = false;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvMatrix.DefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvMatrix.Location = new System.Drawing.Point(203, 75);
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvMatrix.DefaultCellStyle = dataGridViewCellStyle6;
+            this.dgvMatrix.Location = new System.Drawing.Point(263, 75);
             this.dgvMatrix.Name = "dgvMatrix";
             this.dgvMatrix.RowHeadersVisible = false;
             this.dgvMatrix.Size = new System.Drawing.Size(504, 463);
             this.dgvMatrix.TabIndex = 2;
+            this.dgvMatrix.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMatrix_CellValueChanged);
             // 
             // nudRows
             // 
-            this.nudRows.Location = new System.Drawing.Point(271, 545);
+            this.nudRows.Location = new System.Drawing.Point(331, 545);
             this.nudRows.Name = "nudRows";
             this.nudRows.Size = new System.Drawing.Size(47, 20);
             this.nudRows.TabIndex = 3;
@@ -98,7 +106,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(590, 50);
+            this.label2.Location = new System.Drawing.Point(650, 50);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 13);
             this.label2.TabIndex = 4;
@@ -107,7 +115,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(205, 547);
+            this.label3.Location = new System.Drawing.Point(265, 547);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(64, 13);
             this.label3.TabIndex = 5;
@@ -115,7 +123,7 @@
             // 
             // nudColumns
             // 
-            this.nudColumns.Location = new System.Drawing.Point(660, 48);
+            this.nudColumns.Location = new System.Drawing.Point(720, 48);
             this.nudColumns.Name = "nudColumns";
             this.nudColumns.Size = new System.Drawing.Size(47, 20);
             this.nudColumns.TabIndex = 6;
@@ -130,17 +138,77 @@
             // 
             this.lblMatrixSize.AutoSize = true;
             this.lblMatrixSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMatrixSize.Location = new System.Drawing.Point(427, 32);
+            this.lblMatrixSize.Location = new System.Drawing.Point(487, 32);
             this.lblMatrixSize.Name = "lblMatrixSize";
             this.lblMatrixSize.Size = new System.Drawing.Size(60, 31);
             this.lblMatrixSize.TabIndex = 7;
             this.lblMatrixSize.Text = "3x3";
             // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 75);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(101, 13);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "Kapaciteti ishodišta:";
+            // 
+            // txtOutputCapacity
+            // 
+            this.txtOutputCapacity.Location = new System.Drawing.Point(15, 91);
+            this.txtOutputCapacity.Name = "txtOutputCapacity";
+            this.txtOutputCapacity.Size = new System.Drawing.Size(224, 20);
+            this.txtOutputCapacity.TabIndex = 9;
+            this.txtOutputCapacity.TextChanged += new System.EventHandler(this.txtOutputCapacity_TextChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(13, 144);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(93, 13);
+            this.label5.TabIndex = 10;
+            this.label5.Text = "Potrebe odredišta:";
+            // 
+            // txtDestinationNeeds
+            // 
+            this.txtDestinationNeeds.Location = new System.Drawing.Point(15, 160);
+            this.txtDestinationNeeds.Name = "txtDestinationNeeds";
+            this.txtDestinationNeeds.Size = new System.Drawing.Size(224, 20);
+            this.txtDestinationNeeds.TabIndex = 11;
+            this.txtDestinationNeeds.TextChanged += new System.EventHandler(this.txtDestinationNeeds_TextChanged);
+            // 
+            // btnSolve
+            // 
+            this.btnSolve.Location = new System.Drawing.Point(605, 544);
+            this.btnSolve.Name = "btnSolve";
+            this.btnSolve.Size = new System.Drawing.Size(162, 32);
+            this.btnSolve.TabIndex = 12;
+            this.btnSolve.Text = "Riješi";
+            this.btnSolve.UseVisualStyleBackColor = true;
+            this.btnSolve.Click += new System.EventHandler(this.btnSolve_Click);
+            // 
+            // lblResult
+            // 
+            this.lblResult.AutoSize = true;
+            this.lblResult.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblResult.Location = new System.Drawing.Point(262, 585);
+            this.lblResult.Name = "lblResult";
+            this.lblResult.Size = new System.Drawing.Size(58, 24);
+            this.lblResult.TabIndex = 13;
+            this.lblResult.Text = "Z = ?";
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(923, 580);
+            this.ClientSize = new System.Drawing.Size(797, 637);
+            this.Controls.Add(this.lblResult);
+            this.Controls.Add(this.btnSolve);
+            this.Controls.Add(this.txtDestinationNeeds);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.txtOutputCapacity);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.lblMatrixSize);
             this.Controls.Add(this.nudColumns);
             this.Controls.Add(this.label3);
@@ -171,6 +239,12 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown nudColumns;
         private System.Windows.Forms.Label lblMatrixSize;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox txtOutputCapacity;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtDestinationNeeds;
+        private System.Windows.Forms.Button btnSolve;
+        private System.Windows.Forms.Label lblResult;
     }
 }
 
