@@ -54,6 +54,7 @@
     </Compile>
     <Compile Include="Methods\MinimumCostMethod.cs" />
     <Compile Include="Methods\NorthwestCornerMethod.cs" />
+    <Compile Include="Methods\VogelMethod.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="FrmMain.resx">

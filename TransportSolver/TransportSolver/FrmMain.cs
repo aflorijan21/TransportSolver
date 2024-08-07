@@ -29,6 +29,7 @@ namespace TransportSolver
         {
             cmbMethod.Items.Add("Metoda sjeverozapadnog kuta");
             cmbMethod.Items.Add("Metoda minimalnih troškova");
+            cmbMethod.Items.Add("Vogel-ova metoda");
 
             cmbMethod.SelectedItem = "Metoda sjeverozapadnog kuta";
         }
@@ -102,6 +103,9 @@ namespace TransportSolver
                 }else if(cmbMethod.SelectedItem == "Metoda minimalnih troškova")
                 {
                     result = MinimumCostMethod.MinimumCostCalculator(matrix, txtOutputCapacity.Text, txtDestinationNeeds.Text, txtSolutionSteps);
+                }else if (cmbMethod.SelectedItem == "Vogel-ova metoda")
+                {
+                    result = VogelMethod.VogelCalculator(matrix, txtOutputCapacity.Text, txtDestinationNeeds.Text, txtSolutionSteps);
                 }
 
                 lblResult.Text = result;
