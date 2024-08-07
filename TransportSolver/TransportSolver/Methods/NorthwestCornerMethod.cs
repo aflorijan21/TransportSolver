@@ -11,19 +11,20 @@ namespace TransportSolver.Methods
     {
         public static string NorthWestCornerCalculator(object[,] matrix, string outputCapacity, string destinationNeeds, TextBox txtSolutionSteps)
         {
-            int[] capacities = Array.ConvertAll(outputCapacity.Split(','), int.Parse);
-            int[] needs = Array.ConvertAll(destinationNeeds.Split(','), int.Parse);
+            int[] kapaciteti = Array.ConvertAll(outputCapacity.Split(','), int.Parse);
+            int[] potrebe = Array.ConvertAll(destinationNeeds.Split(','), int.Parse);
 
             int i = 0, j = 0;
 
             StringBuilder result = new StringBuilder();
-            int totalCost = 0;
+            int ukupniTrosak = 0;
 
             txtSolutionSteps.Clear();
+            txtSolutionSteps.AppendText("Koraci rješavanja transportnog problema metodom sjeverozapadnog kuta:\r\n");
 
-            while (i < capacities.Length && j < needs.Length)
+            while (i < kapaciteti.Length && j < potrebe.Length)
             {
-                int quantity = Math.Min(capacities[i], needs[j]);
+                int quantity = Math.Min(kapaciteti[i], potrebe[j]);
                 int cost = Convert.ToInt32(matrix[i, j]);
 
                 result.Append($"{quantity}*{cost} + ");
@@ -32,17 +33,17 @@ namespace TransportSolver.Methods
 
                 txtSolutionSteps.AppendText(Environment.NewLine);
 
-                totalCost += quantity * cost;
+                ukupniTrosak += quantity * cost;
 
-                capacities[i] -= quantity;
-                needs[j] -= quantity;
+                kapaciteti[i] -= quantity;
+                potrebe[j] -= quantity;
 
-                if (capacities[i] == 0)
+                if (kapaciteti[i] == 0)
                 {
                     i++;
                 }
 
-                if (needs[j] == 0)
+                if (potrebe[j] == 0)
                 {
                     j++;
                 }
@@ -52,9 +53,9 @@ namespace TransportSolver.Methods
             {
                 result.Length -= 3;
             }
-            result.Append($" = {totalCost}");
+            result.Append($" = {ukupniTrosak}");
 
-            txtSolutionSteps.AppendText($"Ukupni trošak je {totalCost}.\n");
+            txtSolutionSteps.AppendText($"Ukupni trošak je {ukupniTrosak}.\n");
 
             return result.ToString();
         }

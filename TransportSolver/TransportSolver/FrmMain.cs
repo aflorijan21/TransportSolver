@@ -149,6 +149,7 @@ namespace TransportSolver
         private void cmbMethod_SelectedIndexChanged(object sender, EventArgs e)
         {
             ResetResultLabel();
+            txtSolutionSteps.Text = "";
         }
 
     }
