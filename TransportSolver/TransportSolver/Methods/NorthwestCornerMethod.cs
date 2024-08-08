@@ -17,6 +17,11 @@ namespace TransportSolver.Methods
 
             int i = 0, j = 0;
 
+            if (kapaciteti.Sum() != potrebe.Sum())
+            {
+                return "Suma kapaciteta mora biti jednaka sumi potreba.";
+            }
+
             StringBuilder result = new StringBuilder();
             int ukupniTrosak = 0;
 

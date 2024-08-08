@@ -8,7 +8,7 @@ namespace TransportSolver.Methods
     {
         public static string ModiCalculator(object[,] matrix, string outputCapacity, string destinationNeeds, TextBox txtSolutionSteps)
         {
-            return "";
+            return "Z = ?";
         } 
     }
 }

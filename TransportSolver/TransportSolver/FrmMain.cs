@@ -71,6 +71,7 @@ namespace TransportSolver
             UpdateMatrixSizeLabel(dgvMatrix.RowCount, dgvMatrix.ColumnCount);
             ResetResultLabel();
             ResetDgvMatrixCellColors();
+            txtSolutionSteps.Clear();
         }
 
         private void nudColumns_ValueChanged(object sender, EventArgs e)
@@ -80,6 +81,7 @@ namespace TransportSolver
             UpdateMatrixSizeLabel(dgvMatrix.RowCount, dgvMatrix.ColumnCount);
             ResetResultLabel();
             ResetDgvMatrixCellColors();
+            txtSolutionSteps.Clear();
         }
 
         private void btnSolve_Click(object sender, EventArgs e)
@@ -157,18 +159,21 @@ namespace TransportSolver
         {
             ResetResultLabel();
             ResetDgvMatrixCellColors();
+            txtSolutionSteps.Clear();
         }
 
         private void txtOutputCapacity_TextChanged(object sender, EventArgs e)
         {
             ResetResultLabel();
             ResetDgvMatrixCellColors();
+            txtSolutionSteps.Clear();
         }
 
         private void txtDestinationNeeds_TextChanged(object sender, EventArgs e)
         {
             ResetResultLabel();
             ResetDgvMatrixCellColors();
+            txtSolutionSteps.Clear();
         }
 
         private void cmbMethod_SelectedIndexChanged(object sender, EventArgs e)
