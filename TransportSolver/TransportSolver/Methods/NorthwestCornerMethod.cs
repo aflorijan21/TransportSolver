@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace TransportSolver.Methods
 {
     public static class NorthwestCornerMethod
     {
-        public static string NorthWestCornerCalculator(object[,] matrix, string outputCapacity, string destinationNeeds, TextBox txtSolutionSteps)
+        public static string NorthWestCornerCalculator(object[,] matrix, string outputCapacity, string destinationNeeds, TextBox txtSolutionSteps, DataGridView dgvMatrix)
         {
             int[] kapaciteti = Array.ConvertAll(outputCapacity.Split(','), int.Parse);
             int[] potrebe = Array.ConvertAll(destinationNeeds.Split(','), int.Parse);
@@ -38,6 +39,9 @@ namespace TransportSolver.Methods
                 kapaciteti[i] -= quantity;
                 potrebe[j] -= quantity;
 
+                
+                dgvMatrix.Rows[i].Cells[j].Style.BackColor = Color.LightGray;
+
                 if (kapaciteti[i] == 0)
                 {
                     i++;
@@ -59,5 +63,6 @@ namespace TransportSolver.Methods
 
             return result.ToString();
         }
+
     }
 }

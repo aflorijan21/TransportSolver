@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TransportSolver.Methods
 {
     public static class MinimumCostMethod
     {
-        public static string MinimumCostCalculator(object[,] matrix, string outputCapacity, string destinationNeeds, TextBox txtSolutionSteps)
+        public static string MinimumCostCalculator(object[,] matrix, string outputCapacity, string destinationNeeds, TextBox txtSolutionSteps, DataGridView dgvMatrix)
         {
             int[] kapaciteti = Array.ConvertAll(outputCapacity.Split(','), int.Parse);
             int[] potrebe = Array.ConvertAll(destinationNeeds.Split(','), int.Parse);
@@ -23,10 +21,8 @@ namespace TransportSolver.Methods
             }
 
             int[,] rjesenje = new int[brojRedaka, brojStupaca];
-
             int[] preostaliKapaciteti = (int[])kapaciteti.Clone();
             int[] preostalePotrebe = (int[])potrebe.Clone();
-
             int ukupniTrosak = 0;
 
             StringBuilder result = new StringBuilder();
@@ -63,6 +59,8 @@ namespace TransportSolver.Methods
                 result.Append($"{kolicina}*{minTrosak} + ");
                 txtSolutionSteps.AppendText($"Prevezeno {kolicina} jedinica iz {minRedak + 1}. ishodišta u {minStupac + 1}. odredište po trošku {minTrosak}.\n");
                 txtSolutionSteps.AppendText(Environment.NewLine);
+
+                dgvMatrix.Rows[minRedak].Cells[minStupac].Style.BackColor = System.Drawing.Color.LightGray;
             }
 
             if (result.Length > 3)

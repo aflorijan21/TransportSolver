@@ -70,6 +70,7 @@ namespace TransportSolver
             SetupDgvMatrixCellSize();
             UpdateMatrixSizeLabel(dgvMatrix.RowCount, dgvMatrix.ColumnCount);
             ResetResultLabel();
+            ResetDgvMatrixCellColors();
         }
 
         private void nudColumns_ValueChanged(object sender, EventArgs e)
@@ -78,6 +79,7 @@ namespace TransportSolver
             SetupDgvMatrixCellSize();
             UpdateMatrixSizeLabel(dgvMatrix.RowCount, dgvMatrix.ColumnCount);
             ResetResultLabel();
+            ResetDgvMatrixCellColors();
         }
 
         private void btnSolve_Click(object sender, EventArgs e)
@@ -100,19 +102,20 @@ namespace TransportSolver
 
                 if (cmbMethod.SelectedItem.ToString() == "Metoda sjeverozapadnog kuta")
                 {
-                    result = NorthwestCornerMethod.NorthWestCornerCalculator(matrix, txtOutputCapacity.Text, txtDestinationNeeds.Text, txtSolutionSteps);
-                }else if(cmbMethod.SelectedItem.ToString() == "Metoda minimalnih troškova")
+                    result = NorthwestCornerMethod.NorthWestCornerCalculator(matrix, txtOutputCapacity.Text, txtDestinationNeeds.Text, txtSolutionSteps, dgvMatrix);
+                } else if (cmbMethod.SelectedItem.ToString() == "Metoda minimalnih troškova")
                 {
-                    result = MinimumCostMethod.MinimumCostCalculator(matrix, txtOutputCapacity.Text, txtDestinationNeeds.Text, txtSolutionSteps);
-                }else if (cmbMethod.SelectedItem.ToString() == "Vogel-ova metoda")
+                    result = MinimumCostMethod.MinimumCostCalculator(matrix, txtOutputCapacity.Text, txtDestinationNeeds.Text, txtSolutionSteps, dgvMatrix);
+                } else if (cmbMethod.SelectedItem.ToString() == "Vogel-ova metoda")
                 {
-                    result = VogelMethod.VogelCalculator(matrix, txtOutputCapacity.Text, txtDestinationNeeds.Text, txtSolutionSteps);
+                    result = VogelMethod.VogelCalculator(matrix, txtOutputCapacity.Text, txtDestinationNeeds.Text, txtSolutionSteps, dgvMatrix);
                 } else if (cmbMethod.SelectedItem.ToString() == "MODI Metoda")
                 {
                     result = ModiMethod.ModiCalculator(matrix, txtOutputCapacity.Text, txtDestinationNeeds.Text, txtSolutionSteps);
                 }
 
                 lblResult.Text = result;
+                dgvMatrix.ClearSelection();
             }
         }
 
@@ -139,24 +142,39 @@ namespace TransportSolver
             lblResult.Text = "Z = ?";
         }
 
+        private void ResetDgvMatrixCellColors()
+        {
+            foreach (DataGridViewRow row in dgvMatrix.Rows)
+            {
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    cell.Style.BackColor = System.Drawing.Color.White;
+                }
+            }
+        }
+
         private void dgvMatrix_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             ResetResultLabel();
+            ResetDgvMatrixCellColors();
         }
 
         private void txtOutputCapacity_TextChanged(object sender, EventArgs e)
         {
             ResetResultLabel();
+            ResetDgvMatrixCellColors();
         }
 
         private void txtDestinationNeeds_TextChanged(object sender, EventArgs e)
         {
             ResetResultLabel();
+            ResetDgvMatrixCellColors();
         }
 
         private void cmbMethod_SelectedIndexChanged(object sender, EventArgs e)
         {
             ResetResultLabel();
+            ResetDgvMatrixCellColors();
             txtSolutionSteps.Text = "";
         }
 
@@ -205,6 +223,7 @@ namespace TransportSolver
             txtDestinationNeeds.Clear();
 
             SetupDgvMatrixCellSize();
+            ResetDgvMatrixCellColors();
         }
 
         private void btnExample2_Click(object sender, EventArgs e)

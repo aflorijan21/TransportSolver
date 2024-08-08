@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TransportSolver.Methods
 {
     public static class VogelMethod
     {
-        public static string VogelCalculator(object[,] matrica, string izlazniKapacitet, string potrebeOdredista, TextBox txtKoraciRjesavanja)
+        public static string VogelCalculator(object[,] matrica, string izlazniKapacitet, string potrebeOdredista, TextBox txtKoraciRjesavanja, DataGridView dgvMatrix)
         {
             int[] kapaciteti = Array.ConvertAll(izlazniKapacitet.Split(','), int.Parse);
             int[] potrebe = Array.ConvertAll(potrebeOdredista.Split(','), int.Parse);
@@ -121,6 +119,8 @@ namespace TransportSolver.Methods
                 rezultat.Append($"{kolicina}*{trosak} + ");
                 txtKoraciRjesavanja.AppendText($"Transport {kolicina} jedinica od dobavljaca {odabraniRedak + 1} do odredista {odabraniStupac + 1} po cijeni {trosak}.\n");
                 txtKoraciRjesavanja.AppendText(Environment.NewLine);
+
+                dgvMatrix.Rows[odabraniRedak].Cells[odabraniStupac].Style.BackColor = System.Drawing.Color.LightGray;
             }
 
             if (rezultat.Length > 3)
@@ -134,4 +134,3 @@ namespace TransportSolver.Methods
         }
     }
 }
-
