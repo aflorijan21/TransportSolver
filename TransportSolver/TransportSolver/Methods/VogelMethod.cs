@@ -23,7 +23,10 @@ namespace TransportSolver.Methods
             int ukupniTrosak = 0;
             StringBuilder rezultat = new StringBuilder();
             txtKoraciRjesavanja.Clear();
-            txtKoraciRjesavanja.AppendText("Koraci rjesavanja transportnog problema Vogelovom metodom:\r\n");
+            txtKoraciRjesavanja.AppendText("Koraci rješavanja transportnog problema Vogelovom metodom:\r\n");
+
+            int rang = kapaciteti.Length + potrebe.Length - 1; // r = m + n - 1
+            int zauzetaPolja = 0;
 
             while (kapaciteti.Sum() > 0 && potrebe.Sum() > 0)
             {
@@ -117,10 +120,37 @@ namespace TransportSolver.Methods
                 ukupniTrosak += kolicina * trosak;
 
                 rezultat.Append($"{kolicina}*{trosak} + ");
-                txtKoraciRjesavanja.AppendText($"Transport {kolicina} jedinica od dobavljaca {odabraniRedak + 1} do odredista {odabraniStupac + 1} po cijeni {trosak}.\n");
+                txtKoraciRjesavanja.AppendText($"Transport {kolicina} jedinica od dobavljača {odabraniRedak + 1} do odredišta {odabraniStupac + 1} po cijeni {trosak}.\n");
                 txtKoraciRjesavanja.AppendText(Environment.NewLine);
 
                 dgvMatrix.Rows[odabraniRedak].Cells[odabraniStupac].Style.BackColor = System.Drawing.Color.LightGray;
+                zauzetaPolja++;
+            }
+
+            // Degeneracija
+            while (zauzetaPolja < rang)
+            {
+                bool dodanaFiktivnaRelacija = false;
+                for (int x = 0; x < brojRedaka; x++)
+                {
+                    for (int y = 0; y < brojStupaca; y++)
+                    {
+                        if (dgvMatrix.Rows[x].Cells[y].Style.BackColor != System.Drawing.Color.LightGray)
+                        {
+                            dgvMatrix.Rows[x].Cells[y].Style.BackColor = System.Drawing.Color.Yellow;
+                            zauzetaPolja++;
+                            dodanaFiktivnaRelacija = true;
+                            rezultat.Append("0*0 + ");
+                            txtKoraciRjesavanja.AppendText($"Dodavanje fiktivne relacije na poziciju ({x + 1},{y + 1}) s nulom.\n");
+                            txtKoraciRjesavanja.AppendText(Environment.NewLine);
+                            break;
+                        }
+                    }
+                    if (dodanaFiktivnaRelacija)
+                    {
+                        break;
+                    }
+                }
             }
 
             if (rezultat.Length > 3)
@@ -128,7 +158,7 @@ namespace TransportSolver.Methods
                 rezultat.Length -= 3;
             }
             rezultat.Append($" = {ukupniTrosak}");
-            txtKoraciRjesavanja.AppendText($"Ukupni trosak je {ukupniTrosak}.\n");
+            txtKoraciRjesavanja.AppendText($"Ukupni trošak je {ukupniTrosak}.\n");
 
             return rezultat.ToString();
         }

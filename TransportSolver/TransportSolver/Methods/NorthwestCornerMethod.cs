@@ -28,6 +28,9 @@ namespace TransportSolver.Methods
             txtSolutionSteps.Clear();
             txtSolutionSteps.AppendText("Koraci rješavanja transportnog problema metodom sjeverozapadnog kuta:\r\n");
 
+            int rang = kapaciteti.Length + potrebe.Length - 1; // r = m + n - 1
+            int zauzetaPolja = 0;
+
             while (i < kapaciteti.Length && j < potrebe.Length)
             {
                 int quantity = Math.Min(kapaciteti[i], potrebe[j]);
@@ -44,8 +47,9 @@ namespace TransportSolver.Methods
                 kapaciteti[i] -= quantity;
                 potrebe[j] -= quantity;
 
-                
                 dgvMatrix.Rows[i].Cells[j].Style.BackColor = Color.LightGray;
+
+                zauzetaPolja++;
 
                 if (kapaciteti[i] == 0)
                 {
@@ -55,6 +59,32 @@ namespace TransportSolver.Methods
                 if (potrebe[j] == 0)
                 {
                     j++;
+                }
+            }
+
+            // Degeneracija
+            while (zauzetaPolja < rang)
+            {              
+                bool dodanaFiktivnaRelacija = false;
+                for (int x = 0; x < kapaciteti.Length; x++)
+                {
+                    for (int y = 0; y < potrebe.Length; y++)
+                    {
+                        if (dgvMatrix.Rows[x].Cells[y].Style.BackColor != Color.LightGray)
+                        {
+                            dgvMatrix.Rows[x].Cells[y].Style.BackColor = Color.Yellow;
+                            zauzetaPolja++;
+                            dodanaFiktivnaRelacija = true;
+                            result.Append("0*0 + ");
+                            txtSolutionSteps.AppendText($"Dodavanje fiktivne relacije na poziciju ({x + 1},{y + 1}) s nulom.\n");
+                            txtSolutionSteps.AppendText(Environment.NewLine);
+                            break;
+                        }
+                    }
+                    if (dodanaFiktivnaRelacija)
+                    {
+                        break;
+                    }
                 }
             }
 
@@ -68,6 +98,5 @@ namespace TransportSolver.Methods
 
             return result.ToString();
         }
-
     }
 }

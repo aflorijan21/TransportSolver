@@ -29,6 +29,9 @@ namespace TransportSolver.Methods
             txtSolutionSteps.Clear();
             txtSolutionSteps.AppendText("Koraci rješavanja transportnog problema metodom minimalnih troškova:\r\n");
 
+            int rang = kapaciteti.Length + potrebe.Length - 1; // r = m + n - 1
+            int zauzetaPolja = 0;
+
             while (Array.Exists(preostaliKapaciteti, c => c > 0) && Array.Exists(preostalePotrebe, d => d > 0))
             {
                 int minTrosak = int.MaxValue;
@@ -61,6 +64,33 @@ namespace TransportSolver.Methods
                 txtSolutionSteps.AppendText(Environment.NewLine);
 
                 dgvMatrix.Rows[minRedak].Cells[minStupac].Style.BackColor = System.Drawing.Color.LightGray;
+                zauzetaPolja++;
+            }
+
+            // Degeneracija
+            while (zauzetaPolja < rang)
+            {
+                bool dodanaFiktivnaRelacija = false;
+                for (int x = 0; x < brojRedaka; x++)
+                {
+                    for (int y = 0; y < brojStupaca; y++)
+                    {
+                        if (dgvMatrix.Rows[x].Cells[y].Style.BackColor != System.Drawing.Color.LightGray)
+                        {
+                            dgvMatrix.Rows[x].Cells[y].Style.BackColor = System.Drawing.Color.Yellow;
+                            zauzetaPolja++;
+                            dodanaFiktivnaRelacija = true;
+                            result.Append("0*0 + ");
+                            txtSolutionSteps.AppendText($"Dodavanje fiktivne relacije na poziciju ({x + 1},{y + 1}) s nulom.\n");
+                            txtSolutionSteps.AppendText(Environment.NewLine);
+                            break;
+                        }
+                    }
+                    if (dodanaFiktivnaRelacija)
+                    {
+                        break;
+                    }
+                }
             }
 
             if (result.Length > 3)

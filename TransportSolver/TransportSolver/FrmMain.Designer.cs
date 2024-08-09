@@ -59,6 +59,7 @@
             this.btnExample = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
             this.btnExample2 = new System.Windows.Forms.Button();
+            this.btnDegeneracijaPrimjer = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMatrix)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudRows)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudColumns)).BeginInit();
@@ -386,12 +387,23 @@
             this.btnExample2.UseVisualStyleBackColor = true;
             this.btnExample2.Click += new System.EventHandler(this.btnExample2_Click);
             // 
+            // btnDegeneracijaPrimjer
+            // 
+            this.btnDegeneracijaPrimjer.Location = new System.Drawing.Point(536, 11);
+            this.btnDegeneracijaPrimjer.Name = "btnDegeneracijaPrimjer";
+            this.btnDegeneracijaPrimjer.Size = new System.Drawing.Size(87, 23);
+            this.btnDegeneracijaPrimjer.TabIndex = 29;
+            this.btnDegeneracijaPrimjer.Text = "Degeneracija";
+            this.btnDegeneracijaPrimjer.UseVisualStyleBackColor = true;
+            this.btnDegeneracijaPrimjer.Click += new System.EventHandler(this.btnDegeneracijaPrimjer_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
             this.ClientSize = new System.Drawing.Size(967, 628);
+            this.Controls.Add(this.btnDegeneracijaPrimjer);
             this.Controls.Add(this.btnExample2);
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.btnExample);
@@ -466,6 +478,7 @@
         private System.Windows.Forms.Button btnExample;
         private System.Windows.Forms.Button btnReset;
         private System.Windows.Forms.Button btnExample2;
+        private System.Windows.Forms.Button btnDegeneracijaPrimjer;
     }
 }
 
