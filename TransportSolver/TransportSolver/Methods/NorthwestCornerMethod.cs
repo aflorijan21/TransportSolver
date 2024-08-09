@@ -39,7 +39,6 @@ namespace TransportSolver.Methods
                 result.Append($"{quantity}*{cost} + ");
 
                 txtSolutionSteps.AppendText($"Transport {quantity} jedinica od dobavljača {i + 1} do odredišta {j + 1} po cijeni {cost}.\n");
-
                 txtSolutionSteps.AppendText(Environment.NewLine);
 
                 ukupniTrosak += quantity * cost;
@@ -63,30 +62,7 @@ namespace TransportSolver.Methods
             }
 
             // Degeneracija
-            while (zauzetaPolja < rang)
-            {              
-                bool dodanaFiktivnaRelacija = false;
-                for (int x = 0; x < kapaciteti.Length; x++)
-                {
-                    for (int y = 0; y < potrebe.Length; y++)
-                    {
-                        if (dgvMatrix.Rows[x].Cells[y].Style.BackColor != Color.LightGray)
-                        {
-                            dgvMatrix.Rows[x].Cells[y].Style.BackColor = Color.Yellow;
-                            zauzetaPolja++;
-                            dodanaFiktivnaRelacija = true;
-                            result.Append("0*0 + ");
-                            txtSolutionSteps.AppendText($"Dodavanje fiktivne relacije na poziciju ({x + 1},{y + 1}) s nulom.\n");
-                            txtSolutionSteps.AppendText(Environment.NewLine);
-                            break;
-                        }
-                    }
-                    if (dodanaFiktivnaRelacija)
-                    {
-                        break;
-                    }
-                }
-            }
+            Degeneration.SolveDegeneration(dgvMatrix, ref zauzetaPolja, rang, txtSolutionSteps, result);
 
             if (result.Length > 3)
             {

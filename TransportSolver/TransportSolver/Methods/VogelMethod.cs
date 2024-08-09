@@ -128,30 +128,7 @@ namespace TransportSolver.Methods
             }
 
             // Degeneracija
-            while (zauzetaPolja < rang)
-            {
-                bool dodanaFiktivnaRelacija = false;
-                for (int x = 0; x < brojRedaka; x++)
-                {
-                    for (int y = 0; y < brojStupaca; y++)
-                    {
-                        if (dgvMatrix.Rows[x].Cells[y].Style.BackColor != System.Drawing.Color.LightGray)
-                        {
-                            dgvMatrix.Rows[x].Cells[y].Style.BackColor = System.Drawing.Color.Yellow;
-                            zauzetaPolja++;
-                            dodanaFiktivnaRelacija = true;
-                            rezultat.Append("0*0 + ");
-                            txtKoraciRjesavanja.AppendText($"Dodavanje fiktivne relacije na poziciju ({x + 1},{y + 1}) s nulom.\n");
-                            txtKoraciRjesavanja.AppendText(Environment.NewLine);
-                            break;
-                        }
-                    }
-                    if (dodanaFiktivnaRelacija)
-                    {
-                        break;
-                    }
-                }
-            }
+            Degeneration.SolveDegeneration(dgvMatrix, ref zauzetaPolja, rang, txtKoraciRjesavanja, rezultat);
 
             if (rezultat.Length > 3)
             {
