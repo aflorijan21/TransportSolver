@@ -136,6 +136,33 @@ namespace TransportSolver
                 return false;
             }
 
+            int[] kapaciteti = txtOutputCapacity.Text.Split(',').Select(int.Parse).ToArray();
+            int[] potrebe = txtDestinationNeeds.Text.Split(',').Select(int.Parse).ToArray();
+
+            if (kapaciteti.Length != dgvMatrix.RowCount)
+            {
+                MessageBox.Show("Broj redaka u matrici mora odgovarati broju dobavljača (kapaciteta).", "Pogreška unosa", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            if (potrebe.Length != dgvMatrix.ColumnCount)
+            {
+                MessageBox.Show("Broj stupaca u matrici mora odgovarati broju odredišta (potreba).", "Pogreška unosa", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            for (int i = 0; i < dgvMatrix.RowCount; i++)
+            {
+                for (int j = 0; j < dgvMatrix.ColumnCount; j++)
+                {
+                    if (dgvMatrix.Rows[i].Cells[j].Value == null || !int.TryParse(dgvMatrix.Rows[i].Cells[j].Value.ToString(), out _))
+                    {
+                        MessageBox.Show($"Ćelija u redu {i + 1} i stupcu {j + 1} nije ispravno popunjena.", "Pogreška unosa", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                }
+            }
+
             return true;
         }
 
@@ -173,7 +200,7 @@ namespace TransportSolver
         {
             ResetResultLabel();
             ResetDgvMatrixCellColors();
-            txtSolutionSteps.Clear();
+            txtSolutionSteps.Text = " ";
         }
 
         private void cmbMethod_SelectedIndexChanged(object sender, EventArgs e)
