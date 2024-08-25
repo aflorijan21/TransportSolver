@@ -111,9 +111,6 @@ namespace TransportSolver
                 } else if (cmbMethod.SelectedItem.ToString() == "Vogel-ova metoda")
                 {
                     result = VogelMethod.VogelCalculator(matrix, txtOutputCapacity.Text, txtDestinationNeeds.Text, txtSolutionSteps, dgvMatrix);
-                } else if (cmbMethod.SelectedItem.ToString() == "MODI Metoda")
-                {
-                    result = ModiMethod.ModiCalculator(matrix, txtOutputCapacity.Text, txtDestinationNeeds.Text, txtSolutionSteps);
                 }
 
                 lblResult.Text = result;
