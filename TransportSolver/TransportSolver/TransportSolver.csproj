@@ -52,8 +52,8 @@
     <Compile Include="FrmMain.Designer.cs">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="Methods\Degeneration.cs" />
     <Compile Include="Methods\MinimumCostMethod.cs" />
-    <Compile Include="Methods\ModiMethod.cs" />
     <Compile Include="Methods\NorthwestCornerMethod.cs" />
     <Compile Include="Methods\VogelMethod.cs" />
     <Compile Include="Program.cs" />
